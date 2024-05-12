@@ -11,20 +11,13 @@ const sequelize = new Sequelize(
     }
 );
 
-// sequelize
-//     .sync({ force: false })
-//     .then(() => {
-//         console.log("Database synchronized");
-//     })
-//     .catch((error) => {
-//         console.error("Failed to synchronize database:", error);
-//     });
 sequelize
-    .authenticate()
+    .sync({ force: false })
     .then(() => {
-        console.log("Database connection has been established successfully.");
+        console.log("Database synchronized");
     })
-    .catch((err) => {
-        console.error("Unable to connect to the database:", err);
+    .catch((error) => {
+        console.error("Failed to synchronize database:", error);
     });
+
 module.exports = sequelize;

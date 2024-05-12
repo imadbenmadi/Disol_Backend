@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Request } = require("../Models/requests"); // Import your Sequelize model
+const Request = require("../Models/requests"); // Import your Sequelize model
 
 // POST request to create a new request
 router.post("/", async (req, res) => {
@@ -8,15 +8,21 @@ router.post("/", async (req, res) => {
         const { userName, email, typeOfService, phoneNumber, message } =
             req.body;
         if (!userName || !email || !typeOfService || !phoneNumber || !message) {
-            res.status(400).json({ error: "Please provide all required fields" });
+            res.status(400).json({
+                error: "Please provide all required fields",
+            });
             return;
         }
         if (!email.match(/\S+@\S+\.\S+/)) {
-            res.status(400).json({ error: "Please provide a valid email address" });
+            res.status(400).json({
+                error: "Please provide a valid email address",
+            });
             return;
         }
         if (!phoneNumber.match(/^[0-9]{10}$/)) {
-            res.status(400).json({ error: "Please provide a valid phone number" });
+            res.status(400).json({
+                error: "Please provide a valid phone number",
+            });
             return;
         }
         const newRequest = await Request.create({
